@@ -1,7 +1,7 @@
 {
     "name": "vits/laravel-svelme",
     "description": "Helper library for building InertiaJS applications",
-    "version": "0.3",
+    "version": "0.4",
     "license": "MIT",
     "authors": [
         {
