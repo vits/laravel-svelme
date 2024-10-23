@@ -33,22 +33,18 @@ class DateFilter extends BaseFilter
         return new self($name, $label, $default, $apply, $condition, $normalize, $value);
     }
 
-    public function updateQuery($query, $options = [])
-    {
-        if ($this->condition && !($this->condition)($options)) {
-            return $query;
-        }
+    // public function updateQuery($query, $options = [])
+    // {
+    //     $value = $this->hasValue ? $this->value : $this->default;
 
-        $value = $this->hasValue ? $this->value : $this->default;
+    //     if ($this->apply) {
+    //         ($this->apply)($query, $value, $options);
+    //     } else if ($this->hasValue) {
+    //         $query->where($this->name, $value);
+    //     }
 
-        if ($this->apply) {
-            ($this->apply)($query, $value, $options);
-        } else if ($this->hasValue) {
-            $query->where($this->name, $value);
-        }
-
-        return $query;
-    }
+    //     return $query;
+    // }
 
     protected function normalized(mixed $value): mixed
     {

@@ -4,10 +4,11 @@ namespace Vits\Svelme\Http\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Vits\Svelme\Http\SvelmeFilters;
 
 trait IndexFilters
 {
-    protected object|false $indexFiltersInstance = false;
+    protected SvelmeFilters|null|false $indexFiltersInstance = false;
 
     public function applyIndexFilters(Builder|Relation $query, array $options = []): Builder|Relation
     {
@@ -36,7 +37,12 @@ trait IndexFilters
         }
 
         if (property_exists($this, 'indexFiltersClass')) {
-            $this->indexFiltersInstance = new $this->indexFiltersClass();
+            $options = [];
+            if (method_exists($this, 'indexFiltersOptions')) {
+                $options = $this->indexFiltersOptions();
+            }
+
+            $this->indexFiltersInstance = new $this->indexFiltersClass($options);
         } else {
             $this->indexFiltersInstance = null;
         }

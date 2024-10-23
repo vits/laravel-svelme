@@ -39,19 +39,19 @@ class SvelmeResource extends JsonResource
         }
 
         $data = parent::toArray($request);
-        if (\array_key_exists('only', $options)) {
+        if (array_key_exists('only', $options)) {
             $data = Arr::only($data, $options['only']);
         }
 
-        if (\array_key_exists('except', $options)) {
+        if (array_key_exists('except', $options)) {
             $data = Arr::except($data, $options['except']);
         }
 
-        if (\array_key_exists('extra', $options)) {
+        if (array_key_exists('extra', $options)) {
             $data = [...$data, ...$options['extra']];
         }
 
-        if (\array_key_exists('with', $options)) {
+        if (array_key_exists('with', $options)) {
             foreach ($options['with'] as $relation => $resource) {
                 if ($this->relationLoaded($relation)) {
                     if (
