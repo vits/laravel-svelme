@@ -12,8 +12,6 @@ class SvelmeMiddleware extends InertiaMiddleware
     /**
      * Returns shared props.
      *
-     * @param Request $request
-     * @return array
      * @throws BindingResolutionException
      * @throws RuntimeException
      */
@@ -27,7 +25,7 @@ class SvelmeMiddleware extends InertiaMiddleware
             }
 
             $method = Route::current()->getActionMethod();
-            if (('create' === $method || 'edit' === $method)
+            if (($method === 'create' || $method === 'edit')
                 && method_exists($controller, 'sharedFormData')
             ) {
                 $data = [
@@ -44,6 +42,7 @@ class SvelmeMiddleware extends InertiaMiddleware
             'flash' => [
                 'success' => session('success'),
                 'error' => session('error'),
+                'data' => session('data'),
             ],
         ];
     }
